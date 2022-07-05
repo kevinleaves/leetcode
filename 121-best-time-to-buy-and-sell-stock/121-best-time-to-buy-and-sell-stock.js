@@ -12,8 +12,6 @@ var maxProfit = function(prices) {
   for (var high = 0; high < prices.length ; high++) {
     
     var difference = prices[high] - prices[low];
-    console.log(difference)
-    console.log("low",low)
     //shift low pointer
     if (prices[high] < prices[low]) {
       low = high
