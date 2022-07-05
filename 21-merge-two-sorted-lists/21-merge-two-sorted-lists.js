@@ -23,12 +23,10 @@ var mergeTwoLists = function(l1, l2) {
     while (l1 && l2) {
       console.log("l1: ", l1, "l2: ", l2)
       if (l1.val < l2.val) {
-        // result.next = new ListNode(l1.val) (this works even if i add the whole list to result)
-        result.next = l1
+        result.next = new ListNode(l1.val)
         l1 = l1.next
       } else {
-        // result.next = new ListNode(l2.val) (this works even if i add the whole list to result)
-        result.next = l2
+        result.next = new ListNode(l2.val)
         l2 = l2.next
       }
       
