@@ -21,15 +21,20 @@ var mergeTwoLists = function(l1, l2) {
   
     //compare heads, whichever node <, add first
     while (l1 && l2) {
+      console.log("l1: ", l1, "l2: ", l2)
       if (l1.val < l2.val) {
-        result.next = new ListNode(l1.val)
+        // result.next = new ListNode(l1.val) (this works even if i add the whole list to result)
+        result.next = l1
         l1 = l1.next
       } else {
-        result.next = new ListNode(l2.val)
+        // result.next = new ListNode(l2.val) (this works even if i add the whole list to result)
+        result.next = l2
         l2 = l2.next
       }
       
+      console.log(result)
       result = result.next
+      
     }
     
     
@@ -42,7 +47,9 @@ var mergeTwoLists = function(l1, l2) {
     if (l2) {
       result.next = l2
     }
+    
   
     //return result head
+    
     return head.next
 };
