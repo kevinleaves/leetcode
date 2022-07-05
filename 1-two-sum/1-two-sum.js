@@ -4,28 +4,25 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    //create seen obj
-    var seen = {}
-    //create res array
-    var res = []
+    //create seen map
+    //create result array
+    var seen = {};
+    var result = []; 
     
-    //iterate through nums
+    //iterate through array
     for (var i = 0; i < nums.length; i++) {
       var currentNumber = nums[i];
+      //if target - current number exists in seen as a key
       if (seen[target - currentNumber] !== undefined) {
-        res.push(i);
-        res.push(seen[target-currentNumber])
+        //push seen index and current index to result array
+        result.push(i)
+        result.push(seen[target - currentNumber])
       } else {
-        seen[currentNumber] = i  
+        // else store index and value inside seen map as value: index
+        seen[currentNumber] = i
       }
     }
-      //if target - current number is in seen
-         //res.push index of current number
-         //res.push index of target - currentNumber
-      //else
-         //add current number to seen with its index as its value
-    
-    
-    //return res array
-    return res
+  
+  //return result array
+  return result
 };
