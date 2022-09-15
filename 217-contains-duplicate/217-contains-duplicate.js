@@ -3,23 +3,15 @@
  * @return {boolean}
  */
 var containsDuplicate = function(nums) {
-    //create duplicate array
-    let copy = [];
-    //create boolean flag = false
-    let duplicate = false;
+    nums = nums.sort()
+    if (nums.length === 1) {
+        return false
+    }
     
-    //iterate through original array
     for (let i = 0; i < nums.length; i++) {
-        if (copy.indexOf(nums[i]) === -1) {
-            copy.push(nums[i])
-        } else {
-            duplicate = true;
+        if (nums[i] === nums[i+1]) {
+            return true
         }
     }
-        //if element isn't in duplicate array
-            //push it to duplicate
-        //else
-            //flip boolean flag to true
-    //return boolean
-    return duplicate
+    return false
 };
