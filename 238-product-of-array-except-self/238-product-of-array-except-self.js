@@ -3,21 +3,18 @@
  * @return {number[]}
  */
 var productExceptSelf = function(nums) {
-    //populate results array with prefixes 
-    //iterate from right, track suffixes and multiply each prefix element by its suffix to get result
-    let res = [];
-    let prefix = 1;
-    
+    //2 iterations, once to establish prefixes, then iterate from the right, multiply by postfix product
+    let prefixProduct = 1;
+    let result = [];
     for (let i = 0; i < nums.length; i++) {
-        res[i] = prefix;      
-        prefix *= nums[i];
+        result.push(prefixProduct)
+        prefixProduct *= nums[i];    
     }
     
-    let postfix = 1;
-    for (let j = nums.length-1; j>=0; j--) {
-        res[j] *= postfix
-        postfix *= nums[j];
+    let postfixProduct = 1;
+    for (let i = nums.length-1; i >= 0; i--) {
+        result[i] = postfixProduct * result[i]
+        postfixProduct *= nums[i]
     }
-
-    return res
+    return result
 };
