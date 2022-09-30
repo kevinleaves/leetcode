@@ -4,12 +4,16 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
-    for (let i = 0; i < nums.length; i++) {
-        for (let j = i+1; j < nums.length; j++) {
-            if (nums[i] + nums[j] === target) {
-                return [i, j]
-            } 
-        }
-    }   
+  let seen = {};
+  //hashmap for seen values
+  //iterate through nums array
+  for (let i = 0; i < nums.length; i++) {
+    if (target - nums[i] in seen) {
+      return [seen[target - nums[i]], i] 
+    } else {
+      seen[nums[i]] = i  
+    }
+  }
+    //if target - current number is in hashmap
+      //return index value + current index
 };
-
