@@ -5,15 +5,22 @@
 var groupAnagrams = function(strs) {
   let mapping = {};
   for (let str of strs) {
+    //create freq table/hashtable for each string
     let hash = new Array(26).fill(0)
     for (let i = 0; i < str.length; i++) {
       hash[str[i].charCodeAt(0) - 'a'.charCodeAt(0)]++  
     }
-      if (!mapping[hash]) {
-      mapping[hash] = [];
+    
+    //add hashstrings as mapping keys to store matching strings
+    if (mapping[hash]) {
+      mapping[hash].push(str)
+    } else {
+      mapping[hash] = [str]
     }
-    mapping[hash].push(str)   
+    
   }
+  
+  //this obj returns a nested array of obj values
   return Object.values(mapping)  
 };
 
