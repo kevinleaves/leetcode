@@ -13,7 +13,7 @@ var longestPalindrome = function(s) {
       set.add(s[i])
     }
   }
-  return s.length > result ? result + 1 : result
+  return result + (set.size ? 1 : 0)
 }
   
   
