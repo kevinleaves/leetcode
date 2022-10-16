@@ -3,17 +3,17 @@
  * @return {number}
  */
 var longestPalindrome = function(s) {
-  let hash = {};
+  let set = new Set();
   let result = 0;
   for (let i = 0; i < s.length; i++) {
-    hash[s[i]] = hash[s[i]] + 1 || 1
-    if (hash[s[i]] % 2 === 0) {
+    if(set.has(s[i])) {
       result += 2
+      set.delete(s[i])
+    } else {
+      set.add(s[i])
     }
   }
+  return s.length > result ? result + 1 : result
+}
   
-  if (result === s.length) {
-    return result
-  } else if (result < s.length)
-    return result + 1
-};
+  
