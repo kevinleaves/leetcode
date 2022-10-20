@@ -10,11 +10,11 @@ var sortedSquares = function(nums) {
   
   while (sorted_idx > -1) {
     if (Math.abs(nums[r]) < Math.abs(nums[l])) {
-      sorted[sorted_idx] = nums[l] ** 2
+      sorted[sorted_idx] = nums[l] * nums[l];
       l++
       sorted_idx--
     } else {
-      sorted[sorted_idx] = nums[r] ** 2
+      sorted[sorted_idx] = nums[r] * nums[r];
       r--
       sorted_idx--
     }
