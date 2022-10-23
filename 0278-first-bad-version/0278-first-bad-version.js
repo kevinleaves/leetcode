@@ -23,12 +23,15 @@ var solution = function(isBadVersion) {
       while (l < r) {
         let mid = Math.floor((l + (r - l) / 2))
         if (isBadVersion(mid)) {
-          r = mid
+          if (!isBadVersion(mid-1)) {
+            return mid
+          } else {
+            r = mid - 1
+          }
         } else {
           l = mid + 1
         }
       }
       return r
     };
-  
 };
