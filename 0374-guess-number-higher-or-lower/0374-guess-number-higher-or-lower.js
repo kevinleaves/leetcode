@@ -14,10 +14,10 @@
 var guessNumber = function(n) {
     let l = 1
     let r = n    
-    while (l < r) {
+    while (l <= r) {
       let mid = Math.floor(l + (r - l) / 2)
       if (guess(mid) === -1) {
-        r = mid
+        r = mid - 1
       } else if (guess(mid) === 1) {
         l = mid + 1
       } else if (guess(mid) === 0) {
