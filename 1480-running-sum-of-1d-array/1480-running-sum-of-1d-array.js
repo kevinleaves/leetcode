@@ -9,17 +9,13 @@ var runningSum = function(nums) {
   // edgecases:
   // [sum(0,i=0), sum(0,i=1), sum(0,i=2), sum(0,i=3)]
   
-  var sum = 0;
-  var res = [];
-  
+  //in place: no extra memory needed
   // iterate through base array: for every number
-  for (var i = 0; i < nums.length; i++) {
+  for (var i = 1; i < nums.length; i++) {
     //add element to sum
-    sum += nums[i]
-    //push sum to res
-    res.push(sum);
+    nums[i] += nums[i - 1]; 
   }
   
-  return res
+  return nums;
 };
 
