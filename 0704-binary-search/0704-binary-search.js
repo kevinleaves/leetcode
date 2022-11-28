@@ -3,23 +3,30 @@
  * @param {number} target
  * @return {number}
  */
+
+// [1, 2] target = 3
 var search = function(nums, target) {
-  // if (nums.length === 1) {
-  //   return nums[0] === target ? 0 : -1
-  // }
+  //left, right pointers
+  var l = 0;
+  var r = nums.length - 1;
   
-  let l = 0
-  let r = nums.length - 1
-  
+  //while condition
   while (l <= r) {
-    let mid = Math.floor((l + r) / 2)
+    var mid = Math.floor(l + (r - l)/2)
     if (nums[mid] === target) {
       return mid
-    } else if (target < nums[mid] ) {
-      r = mid - 1
+    } else if (nums[mid] > target) {
+      r = mid - 1;
     } else {
-      l = mid + 1
+      l = mid + 1;
     }
   }
+  
+    //find midpoint
+    //if num at midpoint === target: return midpoint
+    //if num at midpoint > target: chop off rightside
+    //if num at midpoint < target: chop off leftside
+  
+  //return -1 if loop exits and not found
   return -1
 };
