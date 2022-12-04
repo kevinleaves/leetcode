@@ -3,31 +3,18 @@
  * @return {boolean}
  */
 var halvesAreAlike = function(s) {
-  var vowels = {
-    a: 0,
-    e: 0,
-    i: 0,
-    o: 0,
-    u: 0,
-  };
-  //check if char is a vowel
-  var isVowel = function (char) {
-    return char in vowels || char.toLowerCase() in vowels
+  //fn to count vowels in a string: return the # of vowels
+  var countVowels = function (s) {
+    var vowels = 'aeiouAEIOU'
+    var count = 0;
+    for (var i = 0; i < s.length; i++) {      
+      if (vowels.indexOf(s[i]) !== -1) {
+        count++
+      }
+    }
+    return count;
   }
   
-  var count1 = 0;
-  var count2 = 0;
-  var l = 0
-  var r = s.length - 1
-  
-  while (l < r) {
-    if (isVowel(s[l++])) {
-      count1++
-    }
-    if (isVowel(s[r--])) {
-      count2++
-    }
-  }
-  
-  return count1 === count2
+  //run fn on both halves of the string
+  return countVowels(s.substring(0, s.length/2)) === countVowels(s.substring(s.length/2, s.length))
 };
