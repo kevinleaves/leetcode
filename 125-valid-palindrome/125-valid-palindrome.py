@@ -1,23 +1,26 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        #transform string into all lowercase
-        #remove nonalphanumeric
-        #reverse [::-1]
-        
-        
-        #2 pointers
-        #while exits when l>r
-        l, r = 0, len(s)-1
-        while l<r:
-            while l < r and not s[l].isalnum():
-                l+=1
-            while r > l and not s[r].isalnum():
-                r-=1
+        l = 0
+        r = len(s) - 1
+
+        while l < r:
+            # ensure l valid
+            while not s[l].isalnum() and l < r:
+                l += 1
+
+            # ensure r valid
+            while not s[r].isalnum() and l < r:
+                r -= 1
+
+            # compare chars at both ends
             if s[l].lower() != s[r].lower():
                 return False
-            l+=1
-            r-=1
+
+            # move pointers inward
+            l += 1
+            r -= 1
+
         return True
-            
-            
-            
+
+
+# 21.11% 17.20%
