@@ -2,6 +2,8 @@
  * @param {Function} fn
  * @return {Function}
  */
+
+// recursive implementation
 var curry = function (fn) {
   // store the original # of args
 
@@ -17,6 +19,16 @@ var curry = function (fn) {
     }
 
     return (...nextArgs) => curried(...args, ...nextArgs);
+  };
+};
+
+// implementation with bind
+var curry = function (fn) {
+  return function curried(...args) {
+    if (args.length >= fn.length) {
+      return fn.apply(this, args);
+    }
+    return curried.bind(this, ...args);
   };
 };
 
