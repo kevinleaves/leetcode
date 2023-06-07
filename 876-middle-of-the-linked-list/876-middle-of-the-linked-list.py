@@ -3,15 +3,16 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
+
+# 71.45% 14.59%
 class Solution:
     def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        slow = head
         fast = head
-        #fast works if list is even 
-        #fast.next works if list is odd 
-        #we use both conditions in our while statement to catch both scenarios
-        while (fast and fast.next): 
-            slow = slow.next
+        slow = head
+
+        while fast and fast.next:
             fast = fast.next.next
+            slow = slow.next
+
         return slow
-            
