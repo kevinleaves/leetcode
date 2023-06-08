@@ -6,23 +6,17 @@
 
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        if not head:
-            return None
-        slow = head
-        fast = head
-        # find initial meeting point
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
-            # if cycle found: initialize second walker/slow
-            if slow == fast:
-            # keep walking/running. when both walkers meet each other, return that node
-                slow2 = head
-                while slow != slow2:
-                    slow = slow.next
-                    slow2 = slow2.next                    
-                return slow
-
-        # cycle isn't found
+        # O(N) time + space. iterate through entire N nodes, store N nodes in set
+        # store nodes in set
+        seen = set()
+        # iterate through LL, if we've seen the node before, we're at the beginning, return that node
+        curr = head
+        while curr:
+            if curr in seen:
+                return curr
+            else:
+                seen.add(curr)
+                curr = curr.next
+        
+        # otherwise no cycles, return None
         return None
-
