@@ -6,17 +6,23 @@
 
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # O(N) time + space. iterate through entire N nodes, store N nodes in set
-        # store nodes in set
-        seen = set()
-        # iterate through LL, if we've seen the node before, we're at the beginning, return that node
-        curr = head
-        while curr:
-            if curr in seen:
-                return curr
-            else:
-                seen.add(curr)
-                curr = curr.next
-        
-        # otherwise no cycles, return None
+        # find intersection node using floyd's
+        fast = head
+        slow = head
+        while fast and fast.next:
+            fast = fast.next.next
+            slow = slow.next
+            if fast == slow:
+                # save ref to intersection node
+                # init pointer at head again
+                slow2 = head
+                while slow2:
+                    if slow2 == slow:
+                        return slow2    
+                    slow2 = slow2.next
+                    slow = slow.next
+                # traverse until pointer == intersection node
+
+        # if no intersection, return -1
         return None
+        
