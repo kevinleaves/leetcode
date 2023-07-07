@@ -8,6 +8,13 @@ var isEmpty = function(obj) {
     // c: O(1) time additional constraint
     // e: empty obj {} => true. empty array [] => true
 
-    const res = Array.isArray(obj) ? obj.length === 0 : Object.keys(obj).length === 0
-    return res
+    // O(n) solution(s)
+    // const res = Array.isArray(obj) ? obj.length === 0 : Object.keys(obj).length === 0
+    // const res = JSON.stringify(obj).length === 2;
+
+    // O(1) time because we're only checking if we can enter the loop. only ever 1 operation
+    for (const _ in obj) {
+      return false
+    }
+    return true
 };
