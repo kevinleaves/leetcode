@@ -7,10 +7,27 @@
 class Solution:
     def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
       '''
-      recursive dfs
+      iterative dfs (simulate recursion)
       add, left, right
       '''
+      res = []
+      stack = []
+      # use a pointer to emulate recursive tree traversal
+      curr = root
 
+      while curr or stack:
+        # traverse left but add right node first
+        if curr:
+          res.append(curr.val)
+          stack.append(curr.right)
+          curr = curr.left
+        else:
+          curr = stack.pop()
+        
+      return res
+
+
+      '''
       res = []
       def dfs(root):
         # base case(s)
@@ -23,3 +40,4 @@ class Solution:
       
       dfs(root)
       return res
+      '''
