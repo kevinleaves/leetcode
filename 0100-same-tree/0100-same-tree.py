@@ -13,13 +13,14 @@ class Solution:
                 return True
             if not node1 or not node2:
                 return False
-            if node1.val != node2.val:
-                return False
 
-            # recursive case(s)
+            equalVals = node1.val == node2.val    
             left = dfs(node1.left, node2.left)
             right = dfs(node1.right, node2.right)
-            return left and right
+
+            # recursive case(s)
+            # if root has equal vals, check left + r subtree
+            return equalVals and left and right
         
         return dfs(p, q)
 
