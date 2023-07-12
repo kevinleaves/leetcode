@@ -6,29 +6,21 @@
 #         self.right = right
 class Solution:
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        # i: 2 btree roots 
-        # o: boolean representing if they're the same
-        # c: none
-        # e: 
-
-        # iterative bfs
         
-        # recursive dfs
+        def dfs(node1, node2):
+            # base case(s)
+            if not node1 and not node2:
+                return True
+            if not node1 or not node2:
+                return False
+            if node1.val != node2.val:
+                return False
 
-        # base case:
-        # 2 nodes are the same if their val is same, and they have the same l and right
+            # recursive case(s)
+            left = dfs(node1.left, node2.left)
+            right = dfs(node1.right, node2.right)
+            return left and right
         
-        if p == None and q == None:
-            return True
-        if p == None or q == None:
-            return False
-        if p.val != q.val:
-            return False
-        
-        left = self.isSameTree(p.left, q.left)
-        right = self.isSameTree(p.right, q.right)
-        return left and right
+        return dfs(p, q)
 
-
-
-        
+            
