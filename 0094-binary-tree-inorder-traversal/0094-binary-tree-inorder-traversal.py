@@ -6,27 +6,35 @@
 #         self.right = right
 class Solution:
     def inorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        '''
+        res = []
+        def dfs(node):
+            if not node:
+                return None
+            
+            # left, node, right
+            dfs(node.left)
+            res.append(node.val)
+            dfs(node.right)
+        
+        dfs(root)
+        return res
+        '''
         res = []
         stack = []
-        
-        # use a pointer to traverse in iterative solution
-        curr = root    
-        # consider this loop the equivalent of a recursive call
-        while stack or curr:
-            # this while loop is essentially a base case
-            # go left as much as we can
+        curr = root
+
+        while curr or stack:
+            # add right nodes to stack
+            # traverse all the way left
             while curr:
+                # add current node and all left nodes to the stack
                 stack.append(curr)
                 curr = curr.left
             
-            # curr has reached all the way to the left/curr is null, we can perform actions now
-            # top of the stack is our leftmost node
+            # once we've hit our base case, pop node, process, go right
+            node = stack.pop()
+            res.append(node.val)
+            curr = node.right
 
-            # a stack pop is basically a recursion return. every time we hit a null we pop
-            curr = stack.pop()
-            # inorder traversal
-            res.append(curr.val)
-            curr = curr.right
-            
         return res
-
