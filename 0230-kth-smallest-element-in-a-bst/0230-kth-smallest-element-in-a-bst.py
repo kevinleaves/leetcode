@@ -6,18 +6,27 @@
 #         self.right = right
 class Solution:
     def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
-        # inorder traversal of bst to build sorted array
-        # return arr[k - 1]
-
-        res = []
-        def inorder(node):
-            if not node:
-                return None
-
-            inorder(node.left)
-            res.append(node.val)
-            inorder(node.right)
-
-        inorder(root)
+        # inorder traversal of bst        
+        # iterative: we don't have to traverse entire bst, we stop when we reach k
         
-        return res[k-1]
+        stack = []
+        curr = root
+        position = 1
+
+        while curr or stack:
+            # traverse left
+            while curr:
+                stack.append(curr)
+                curr = curr.left
+            
+            node = stack.pop()
+            # action with node
+            if position == k:
+                return node.val
+            else:
+                position += 1
+
+            # traverse right
+            curr = node.right
+
+
