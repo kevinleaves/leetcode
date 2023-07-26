@@ -25,23 +25,26 @@ class Solution:
         # while loops to merge 
         # all elements are exhausted
         while fill >= 0 and right >= 0 and left >= 0:
-            # after fill, decrement fill and move the correct pointer   
-            # compare left to right
-            if nums1[left] < nums2[right]:
-                nums1[fill] = nums2[right]
-                right -= 1
-                fill -= 1
-            # takes from left when 2 items are equal
-            else:
+            if nums1[left] > nums2[right]:
                 nums1[fill] = nums1[left]
                 left -= 1
                 fill -= 1
-            
-        # means we're left with the right side
+            else:
+                # exhaust right faster because we exhaust right when it's larger AND when both elements are equal
+                nums1[fill] = nums2[right]
+                right -= 1
+                fill -= 1
+        
+        # haven't exhausted left yet, handle that
+        while left >= 0:
+            nums1[fill] = nums1[left]
+            left -= 1
+            fill -= 1
+
         while right >= 0:
             nums1[fill] = nums2[right]
             right -= 1
             fill -= 1
-
+            
         return nums1
 
