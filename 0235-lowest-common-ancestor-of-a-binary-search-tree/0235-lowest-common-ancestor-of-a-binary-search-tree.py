@@ -8,22 +8,18 @@
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
         '''
-        i: BST, p & q nodes
-        o: LCA node
-        c: none
-        e: idk
+
         '''
-        if not root:
-            return None
-
-        if p.val > root.val and q.val > root.val:
-            # recursively traverse right
-            root = self.lowestCommonAncestor(root.right, p, q)
-        elif p.val < root.val and q.val < root.val:
-            root = self.lowestCommonAncestor(root.left, p, q)
-        else:
-            return root
-
-        return root
-
+        curr = root
+        while curr:
+        # curr val is above max or below min
+            if curr.val > max(p.val, q.val):
+                # traverse right
+                curr = curr.left
+            elif curr.val < min(p.val, q.val):
+                curr = curr.right
+            else:
+                # we're either == to p or q or betwen p & q
+                return curr
+        
         
