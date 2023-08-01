@@ -7,33 +7,32 @@
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
         '''
-        i: root of btree
-        o: array of subarrays, each subarray contains all nodes at ith level
-        c: none
-        e: root empty => return empty
-        '''
+        level order traversal is bfs
+        q 
+        add all nodes of a level to q
+        process (add node into subarray)
+        once we're done with a level, push into res array
 
+        res = [[3]]
+        q [[9], [20]]
+        node = [3]
+        '''
         res = []
         q = collections.deque()
-
         if root:
-            q.appendleft(root)
+            q.append(root)
         
-        # how do we know that we've cleared a level
-        # answer: use a for loop to process an entire level's nodes. we still pop nodes 1 at a time, but this allows us to populate a subarray
         while q:
-            # process nodes 1 level a time
             level = []
-            for i in range(len(q)):
+            for _ in range(len(q)):
                 node = q.popleft()
-                # add an entire level's children to the q.
                 if node.left:
                     q.append(node.left)
                 if node.right:
                     q.append(node.right)
-                # subarray stuff
                 level.append(node.val)
+            
             res.append(level)
+
         return res
 
-        
