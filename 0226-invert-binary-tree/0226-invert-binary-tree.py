@@ -7,18 +7,17 @@
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         '''
-        i: root
-        o: root => invert the tree
-        c: none
-        e: none
+        for every node,
+        swap left and right children nodes
+
         '''
+        # base case(s)
         if not root:
             return None
 
-        right = self.invertTree(root.right)
+        # recursive case(s)
+        # this is a preorder traversal
         left = self.invertTree(root.left)
-
-        root.left = right
-        root.right = left
-
+        right = self.invertTree(root.right)
+        root.left, root.right = right, left
         return root
