@@ -6,26 +6,26 @@
 #         self.right = right
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
-        '''
-        maintain a global sum
-        dfs, stop at a valid path
-        process path numbers, sum them
-        '''
-
+        
         res = [0]
 
-        def dfs(node, path):
+        def dfs(node: Optional[TreeNode], pathSum: int):
             if not node:
                 return 0
 
-            path += str(node.val)
-            left = dfs(node.left, path)
-            right = dfs(node.right, path)
-            if not left and not right:
-                res[0] += int(path)
-            return int(path)
-            
+            # preorder traversal
+            # process
+            pathSum *= 10
+            pathSum += node.val
 
-        dfs(root, '')
+            if not node.left and not node.right:
+                res[0] += pathSum
+
+            # left
+            dfs(node.left, pathSum)
+
+            # right
+            dfs(node.right, pathSum)
+
+        dfs(root, 0)
         return res[0]
-
