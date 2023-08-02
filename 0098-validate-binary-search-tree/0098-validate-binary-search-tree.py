@@ -7,30 +7,30 @@
 class Solution:
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
         '''
-        helper dfs w/ upper and lower bounds
-        return a boolean by checking if current node is within bounds 
-
-        root is a bst if both its left and right subtrees are valid
-        an empty tree is a valid BST
-
+        set a min, max range
+        update values as we traverse left and right
+        if we traverse left, update upper bound
+        if we traverse right, update min bound
+        init bounds as 
         '''
 
-        def isWithinRange(root, low, high):
-            # empty node is a BST
-            if not root:
+        lower, upper = float('-inf'), float('inf')
+        def isValid(node: Optional[TreeNode], lower, upper) -> bool:
+            if not node:
                 return True
-
-            # if node val not within range, return False
-            withinRange = root.val > low and root.val < high
-            if not withinRange:
+            
+            # check if node is within range?
+            if node.val >= upper or node.val <= lower:
                 return False
 
-            # using BST properties... if traverse left, we update upper bound
-            left = isWithinRange(root.left, low, root.val)
-            # using BST properties... if traverse right, we update lower bound
-            right = isWithinRange(root.right, root.val, high)
-
-            # is Valid BST when left and right
-            return left and right
+            # traverse left, update upper
+            left = isValid(node.left, lower, node.val)
             
-        return isWithinRange(root, float('-inf'), float('inf'))
+            # traverse right, update lower
+            right = isValid(node.right, node.val, upper)
+
+            return left and right
+
+
+        return isValid(root, lower, upper)
+        
