@@ -7,32 +7,25 @@
 class Solution:
     def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         '''
-        i: root of btree
-        o: array w/ ints that you can see from the right side
-        c: none
-        e: empty root
+        level order traversal, take the last node of every level
         '''
 
-        if not root:
-            return None
-        
-        q = collections.deque()
-        q.append(root)
         res = []
+        curr = root
+        q = collections.deque()
+        if curr:
+            q.append(curr)
+
         while q:
-            qLen = len(q)
-            # bfs iterating through 1 level at a time
-            for i in range(qLen):
+            levelLength = len(q)
+
+            for i in range(levelLength):
                 node = q.popleft()
                 if node.left:
                     q.append(node.left)
                 if node.right:
                     q.append(node.right)
-                if i == qLen-1:
+                if i == levelLength - 1:
                     res.append(node.val)
-
+                
         return res
-        '''
-        res = []
-        q: [15, 5, 4]
-        '''
