@@ -1,13 +1,23 @@
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
         '''
-        i: string of a-z chars + # spaces
-        o: int representing the length of the last word in the string
-        c: none
-        e: strings can have multiple spaces btwn words
-
-        split on space => take array last index => find length
-        string split doesn't work fully when space delimiter > 1 space. NVM IT DOES
+        find starting left idx
+        start there, go left and store maximum
         '''
-        split = s.split()
-        return len(split[-1])
+        s = ' ' + s + ' '
+        
+        r = len(s) - 1
+        
+        while s[r] == ' ':
+            r -= 1
+        
+        l = r
+        
+        # no spaces
+        if l == -1:
+            return len(s)
+
+        while l > 0 and s[l] != ' ':
+            l -= 1
+        
+        return r - l
