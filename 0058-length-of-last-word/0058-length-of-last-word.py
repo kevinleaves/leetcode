@@ -12,10 +12,6 @@ class Solution:
             r -= 1
         
         l = r
-        
-        # no spaces
-        if l == -1:
-            return len(s)
 
         while l > 0 and s[l] != ' ':
             l -= 1
