@@ -3,7 +3,7 @@ class Solution:
         R = len(grid)
         C = len(grid[0])
 
-        res = 0
+        res = float('-inf')
         for r in range(R - 2):
             for c in range(C - 2):
                 start = grid[r][c]
