@@ -5,21 +5,19 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        # recursive solution
-        # base case if head is 0 nodes or 1 node:
-        # if head is null (0 nodes) => return head, which is null. or if 1 node (return head)
-        if not head or not head.next:
-            return head
-
-        # recursive case
-        # prev is the new head of the reversed sublist.
-        prev = self.reverseList(head.next)
-
-        # head.next is always the tail of our reversed sublist. reverse the pointer
-        head.next.next = head
-
-        # break the current connection
-        head.next = None
-
-        # return the new tail
+        '''
+        instantiate prev pointer to null (this will help us reverse the links)
+        while head is not null
+            store reference to next node before we reverse the link
+            reverse the link by setting head.next to prev
+            move prev to head
+            move head to next
+        return prev
+        '''
+        prev = None
+        while head:
+            next = head.next
+            head.next = prev
+            prev = head
+            head = next
         return prev
