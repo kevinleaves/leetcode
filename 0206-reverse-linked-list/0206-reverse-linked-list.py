@@ -5,19 +5,25 @@
 #         self.next = next
 class Solution:
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        '''
-        instantiate prev pointer to null (this will help us reverse the links)
-        while head is not null
-            store reference to next node before we reverse the link
-            reverse the link by setting head.next to prev
-            move prev to head
-            move head to next
-        return prev
-        '''
+        # sentinel node/dummy node becomes the new tail
+        # floating next reference to the next node
+        # traverse initial order while simultaneously reversing the links
+
+        # need a prev node
+        # iterate through current list starting from the head (iteration stops when curr node is null)
+          # store reference to next node
+          # set current node's next to the node behind it
+          # current node becomes next node that we stored a reference to earlier
+
         prev = None
-        while head:
-            next = head.next
-            head.next = prev
-            prev = head
-            head = next
+        curr = head
+        while curr:
+          next = curr.next
+          curr.next = prev
+          prev = curr
+          curr = next
+        
         return prev
+
+        
+
