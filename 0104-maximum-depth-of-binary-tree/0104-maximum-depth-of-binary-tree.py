@@ -6,12 +6,24 @@
 #         self.right = right
 class Solution:
     def maxDepth(self, root: Optional[TreeNode]) -> int:
-        # base case(s)
-        if not root:
-            return 0
-        # recursive case(s)
+        # store res which is the max depth of traversal
+        res = 0
 
-        left = self.maxDepth(root.left)
-        right = self.maxDepth(root.right)
+        def dfs(node, curr):
+            nonlocal res
 
-        return 1 + max(left, right)
+            if not node:
+                return
+
+            curr += 1
+            res = max(res, curr)
+
+            dfs(node.left, curr)
+            dfs(node.right, curr)
+
+        # recursively explore all possible paths in the tree
+        # as we path, update max depth using current depth
+        dfs(root, 0)
+
+        # return max depth 
+        return res
