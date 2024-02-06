@@ -6,33 +6,28 @@
 #         self.right = right
 class Solution:
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        '''
-        level order traversal is bfs
-        q 
-        add all nodes of a level to q
-        process (add node into subarray)
-        once we're done with a level, push into res array
-
-        res = [[3]]
-        q [[9], [20]]
-        node = [3]
-        '''
+        
+        # traverse 1 level/depth at a time
         res = []
         q = collections.deque()
-        if root:
-            q.append(root)
         
+        # initialize q with the root
+        if root:
+          q.appendleft(root)
+
         while q:
-            level = []
-            for _ in range(len(q)):
-                node = q.popleft()
-                if node.left:
-                    q.append(node.left)
-                if node.right:
-                    q.append(node.right)
-                level.append(node.val)
-            
-            res.append(level)
-
+          # starting from the root, we add its 2 children nodes into a queue
+          # level contains node values
+          level = []
+          # do not add null nodes to the q
+          for i in range(0, len(q)):
+            # process current node in the for loop
+            curr = q.popleft()
+            if curr.left:
+              q.append(curr.left)
+            if curr.right:
+              q.append(curr.right)
+            level.append(curr.val)
+          # after we're done processing nodes aka adding child nodes to the q and adding the node val to level
+          res.append(level)  
         return res
-
