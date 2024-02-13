@@ -7,5 +7,14 @@ class Solution:
         #             return True
         # return False
         
-        res = set(nums)
-        return not (len(res) == len(nums))
+        # set constructor accepts an iterable
+        # linear space, linear time
+        # res = set(nums)
+        # return not (len(res) == len(nums))
+        
+        nums.sort()
+        for i in range(len(nums)):
+            if i != len(nums)-1: # if i isn't the last index
+                if nums[i] == nums[i + 1]:
+                    return True
+        return False
