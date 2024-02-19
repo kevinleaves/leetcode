@@ -5,26 +5,37 @@
 #         self.next = next
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        # 1 pass using 2 pointers. slow pointer trails by n steps. once fast is completes 1 pass, slow should be at pred n node
-        
-        # use sentinel/dummy node because the edge case of head=[1] n = 1, which means the head can change. when the head changes, use dummy node.
-        dummy = ListNode()
-        dummy.next = head
-        slow = dummy
+        # header node
+        header = ListNode(None, head)
+        # remove node from the back without a reference to the tail node
+        '''
+        solution 1: any # of passes
+        # find length of list k
+        # remove the (k - n)th node from the front
+
+        handle the remove 0th node edge case
+        '''
+        # iterate 1 time, counting the number of elements in the list, k
+        # target index to remove is index k - n
+        # iterate until curr pointer is at element prior to the removed element
+        # shift that pointer to the k-n th's node.next
+        k = 0
         curr = head
-
-        # create window of n size between slow and curr
-        for _ in range(n):
-            curr = curr.next
-
         while curr:
-            curr = curr.next
-            slow = slow.next
+          k += 1
+          curr = curr.next
         
-        # slow should be at node before nth node. remove nth node
-        slow.next = slow.next.next
+        target = k - n
+        if target == 0:
+          header.next = header.next.next
+          return header.next
+
+        curr = head
+        for _ in range(0, target - 1):
+          curr = curr.next
         
-        return dummy.next
-        
+        curr.next = curr.next.next
+        return header.next
 
 
+        
