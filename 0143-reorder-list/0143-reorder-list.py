@@ -8,35 +8,46 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        # find mid node
-        fast = head
+        # [1,2,3,4,5,6,7] -> [1,7,2,6,3,5,4]
+        # find midpoint, reverse right side of list
+        dummy = ListNode(None, head)
+        curr = head
         mid = head
-        while fast and fast.next:
-            fast = fast.next.next
-            mid = mid.next
+
+        # in odd numbered lists, the tail is in the right spot
+        # but in even numbered lists, the tail points to None
+        while curr and curr.next:
+          curr = curr.next.next
+          mid = mid.next
+
+        # reverse right side of list using mid node as head
         
-        # reverse right portion of list
-        tail = None
+        prev = None
         curr = mid
         while curr:
-            next = curr.next
-            curr.next = tail
-            tail = curr
-            curr = next
+          tmp = curr.next
+          curr.next = prev
+          prev = curr
+          curr = tmp
 
-        # build new linked list
         curr = head
-        while tail and tail.next:
-            # store next nodes from left and right and change the pointers
-            rightNext = curr.next # 2
-            curr.next = tail # 1 -> 5
-            leftNext = tail.next # 4
-            tail.next = rightNext # 5 -> 2
-            
-            # traverse towards center
-            curr = rightNext
-            tail = leftNext
+        # prev is tail
+        while prev and prev.next:
+          rightNext = curr.next
+          leftNext = prev.next
+          curr.next = prev
+          prev.next = rightNext
+
+          curr = rightNext
+          prev = leftNext
+        return dummy.next
+
+          
+          
+
+
         
-        return head
+
+
 
 
