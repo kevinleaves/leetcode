@@ -1,33 +1,38 @@
 class Solution:
     def mergeAlternately(self, word1: str, word2: str) -> str:
-        '''
-        i: 2 strings of lowercase english chars
-        o: merged string
-        c: none
-        e: 3 cases (w1 larger w2 larger, both equal length)
+      '''
+      cases: 
+        w1 len == w2 len
+        w1 len > w2 len
+        w1 len < w2 len
 
+      want to hit every element
+
+      no constraints on time and space
+      can build resulting string
+
+      alternating starting with w1
+      
+
+      add w1[0]
+      add w2[0]
+      '''
+
+      res = ''
+      position = 0
+      # outer runs as long as we haven't hit all elements
+      while position < len(word1) or position < len(word2): 
+        res += word1[position]
+        res += word2[position]
+        position += 1
         
-           2
-        "abv" 
-        
-           2
-        "pq"
+        # w1 is longer, add the rest of w1
+        if position >= len(word2):
+          res += word1[position:]
+          return res
+        elif position >= len(word1):
+        # w2 is longer
+          res += word2[position:]
+          return res
 
-        merged = 'a'
-        '''
-
-        position = 0
-        merged = ''
-        while position < len(word1) and position < len(word2):
-            merged += word1[position]
-            merged += word2[position]
-            position += 1
-        
-        # if w1 is shorter, add rest of w2
-        if position >= len(word1):
-            merged += word2[position:]
-        # if w2 is shorter, add rest of w1
-        else:
-            merged += word1[position:]
-
-        return merged
+      return res
