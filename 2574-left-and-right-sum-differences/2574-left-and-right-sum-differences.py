@@ -8,19 +8,20 @@ class Solution:
         at index i of result is the abs(leftsum - rightsum) where 
         leftsum is the sum of the elements to the left but not including the current element
         and rightsum is the sum of the elements to the right but not including the current element
-
-
         '''
-
-        leftSum = 0
-        rightSum = 0
         res = [0]*len(nums)
         
+        # time complexity n^3?
         for i in range(len(nums)):
+          leftSum = 0
+          rightSum = 0
           # update leftSum
-          leftSum = sum(nums[:i])
+          for j in range(i):
+            leftSum += nums[j]
+          
           # update rightSum
-          rightSum = sum(nums[i+1:])
+          for j in range(i + 1, len(nums)):
+            rightSum += nums[j]
 
           # set res at i
           res[i] = abs(leftSum - rightSum)
