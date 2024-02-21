@@ -10,18 +10,21 @@ class Solution:
         and rightsum is the sum of the elements to the right but not including the current element
         '''
         res = [0]*len(nums)
-        
+        leftSum = 0
+        rightSum = sum(nums)
+
+
         # time complexity n^3?
         for i in range(len(nums)):
-          leftSum = 0
-          rightSum = 0
-          # update leftSum
-          for j in range(i):
-            leftSum += nums[j]
-          
-          # update rightSum
-          for j in range(i + 1, len(nums)):
-            rightSum += nums[j]
+          # update sums
+          rightSum -= nums[i]
+          leftSum += nums[i - 1]
+
+          # edge cases at either end of the array
+          if i == 0:
+            leftSum = 0  
+          if i == len(nums) - 1:
+            rightSum = 0
 
           # set res at i
           res[i] = abs(leftSum - rightSum)
