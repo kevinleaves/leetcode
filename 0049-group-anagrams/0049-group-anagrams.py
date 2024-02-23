@@ -1,21 +1,44 @@
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
-        hash = {}
-        for string in strs:
-            # key is an empty array of length 26
-            keyArray = [0]*26
-            # iterate through current string
-            for c in string:
-                # for each character, increment the correct position in the array
-                keyArray[ord(c) - 97] += 1                
+        '''
+        if two strings are anagrams, group them together in a subarray
 
-            key = tuple(keyArray)
-            if  key not in hash:
-                hash[key] = []
-                # add the current string to the array
-                # append the current string to the array
-                
-            hash[key].append(string)
+        somehow need to hash a particular anagram pattern inside of a key. add any strings in strs
+        that match the hash into its array
 
-        # grab all subarrays from the hashmap and return them
-        return hash.values()
+        we can represent a specific anagram pattern through an array of 26
+
+        create hashtable to store our resulting arrays
+        shape = {
+          anagramPattern: ['eat', 'ate', 'tea'] 
+          anagramPattern: [] 
+          anagramPattern: [] 
+        }
+        iterate through strs
+        for each string:
+          generate a pattern array
+          check for inclusion within our dict
+          if our pattern is a key in the dict:
+            add the current string to the array at that key
+          otherwise
+            create the key
+            add the current string to the array at that key
+        
+        return array of all values in the hashtable
+        '''
+
+        grouped = {}
+        for s in strs:
+          pattern = [0]*26
+          for c in s:
+            pattern[ord(c) - 97] += 1
+           
+          # add to our hash
+          key = str(pattern)
+          if key not in grouped:
+            grouped[key] = []  
+
+          grouped[key].append(s)
+        return grouped.values()
+
+
