@@ -1,32 +1,23 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
-        # define res array
-        res = [0]*len(nums)
-        # initialize prefix product
-        prefix = 1
+        # O(N) space, O(N) time
+        prefixes = [0]*len(nums)
+        suffixes = [0]*len(nums)
 
-        # pass 1
-        # iterate through nums array 
-        for i in range(len(nums)):
-            res[i] = prefix
-            prefix *= nums[i]
-        # populate res
-        # update prefix
+        runningPrefixProduct = 1
+        for i, num in enumerate(nums):
+          # update prefix array
+          prefixes[i] = runningPrefixProduct
+          # update runningProduct
+          runningPrefixProduct *= num
 
-        # pass 2
-        # reset prefix to 1
-        prefix = 1
-        # iterate from right side first
-        for i in range(len(nums) - 1, -1, -1):
-            # populate res with current element x prefix
-            res[i] *= prefix
-            # update prefix (x current number)
-            prefix *= nums[i] 
+        runningSuffixProduct = 1
+        for j in range(len(nums) - 1, -1,-1):
+          suffixes[j] = runningSuffixProduct
+          runningSuffixProduct *= nums[j]
 
-        # return res
-        return res
-
+        for k in range(len(prefixes)):
+          prefixes[k] *= suffixes[k]
         
-
-
-
+        return prefixes
+        
