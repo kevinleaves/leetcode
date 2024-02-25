@@ -1,45 +1,42 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
         '''
-        I: int[]
-        O int[] with the top k most frequent elements in nums
-        C: nums len > 0. time is better than O(nlogn). no space constraints
-        E: k is always valid. 
+        k is equal to the return array length
+
+        count frequency of elements in nums
+        return the k highest frequency elements in nums
 
 
-        initial object to store frequencies
-        create bucket array
-        iterate over that object's keys, create a new bucket array in buckets using value at key.
-        append current key to that bucket if it exists
 
-        create res array
-        iterate through buckets array backwards,
-        appending items from the highest frequency bucket until res array length == k
+        0  1 2 3 4
+        [][3][2][1][]
 
-        return k
+        init counter dict
+        populate counter dict with frequencies
+        generate bucket array from dict using max value/frequency from dictionary
+        populate bucket array with elements from nums
+        iterate backwards from the bucket, populating result array and decrementing k until it reaches 0
+
+        return res array
         '''
-
-        freq = collections.defaultdict(int)
+        counter = {}
         for num in nums:
-            freq[num] += 1
-
-        buckets = []
-
-        for i in range(max(freq.values()) + 1):
-            buckets.append([])
-
-        for key in freq.keys():
-            val = freq[key]
-            buckets[val - 1].append(key)
+          counter[num] = counter.get(num, 0) + 1
         
-        # iterate through buckets backwards until we find k amount
+        maxFrequency = max(counter.values())
+        
+        buckets = [[] for _ in range(maxFrequency)]
+
+        for key, value in counter.items():
+          buckets[value - 1].append(key)
+
         res = []
+        for i in range(len(buckets) -1, -1, -1):
+          for j in range(len(buckets[i]) - 1, -1, -1):
+            if k > 0:
+              res.append(buckets[i][j])
+            k -= 1          
 
-        for i in range(len(buckets) - 1, -1, -1):
-            for j in range(len(buckets[i])):
-                res.append(buckets[i][j])
-                if len(res) == k:
-                    return res
-    
+        return res
 
-
+        
