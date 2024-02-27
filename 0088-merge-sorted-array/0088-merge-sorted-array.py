@@ -2,49 +2,50 @@ class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """
         Do not return anything, modify nums1 in-place instead.
-        
-        
-        nums1 = [1,2,3,0,0,0], m = 3, nums2 = [2,5,6], n = 3
 
-        i: 2 nums arrays, m, n representing # elements in the arrays
-        o: nums1 filled with items from nums2. sorted
-        c: O(m + n) time
-        e: 
+        i: 2 nums arrays
+        o: 
+        c:
+        e:
+
+        read elements from right to left from both sides of the array
+
+        write pointer starts at the end of the array
+        when we successfully write using an element from either array,
+        we decrement that pointer
+        need conditions to ensure that every original number in both arrays is written once
+        write until write pointer is < 0
+
         """
 
-        '''
-        l                   
-        1 2 3 0 0 0         2 5 6
-        '''
+        r1 = m - 1 # 2
+        r2 = n - 1 # 2
+        w1 = len(nums1) - 1 # 5
+
+        while w1 >= 0 and r1 >= 0 and r2 >= 0:
+          # fill in spots at w1 with elements from n1 or n2 depending on which is larger
+          # compare elements at r1 and r2
+          if nums2[r2] >= nums1[r1]:
+            nums1[w1] = nums2[r2]
+            r2 -= 1
+          else:
+          # if first number is larger
+            nums1[w1] = nums1[r1]
+            r1 -= 1
+
+          w1 -= 1
+          # conditions to exhaust either array if they have leftover elements
+          # we've exhausted r2, fill in the rest of the elements from n1
+
+        while r2 >= 0:
+          nums1[w1] = nums2[r2]
+          r2 -= 1
+          w1 -= 1
+
+                  
+                  
+          
+
+
+
         
-        # set pointers
-        fill = m + n - 1
-        left = m - 1
-        right = n - 1
-
-        # while loops to merge 
-        # all elements are exhausted
-        while fill >= 0 and right >= 0 and left >= 0:
-            if nums1[left] > nums2[right]:
-                nums1[fill] = nums1[left]
-                left -= 1
-                fill -= 1
-            else:
-                # exhaust right faster because we exhaust right when it's larger AND when both elements are equal
-                nums1[fill] = nums2[right]
-                right -= 1
-                fill -= 1
-        
-        # haven't exhausted left yet, handle that
-        while left >= 0:
-            nums1[fill] = nums1[left]
-            left -= 1
-            fill -= 1
-
-        while right >= 0:
-            nums1[fill] = nums2[right]
-            right -= 1
-            fill -= 1
-            
-        return nums1
-
