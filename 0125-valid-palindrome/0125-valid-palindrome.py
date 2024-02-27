@@ -1,33 +1,38 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
+        '''
+        a string is a palindrome if it reads the same forwards and backwards
+        can: reverse the string and strictly compare the two
+        or:
+        two pointers, one at the start and end
+        while left is <= right
+        increment left += 1
+        decrement right -= 1
+        only compare chars if they're not whitespace or special characters
+        once pointers valid, compare the lowercase versions of both chars
+        if they're not equal
+          early return false
         
+        
+        o: return boolean. true if s is a palindrome, false if not
         '''
-        establish 2 pointers, left and right. starting at the edges of the string
-        while l <= r
-            move l pointer until valid character (skip all spaces)
-            while s[l] isn't alnum
-                increment l
+        left = 0
+        right = len(s) - 1
 
-            move r pointer until valid character (skip all spaces)
-            while s[r] isn't alnum
-                decrement r
+        while left < right:
+          if not s[right].isalnum():
+            right -= 1
+          
+          if not s[left].isalnum():
+            left += 1
 
-            once valid characters
-            compare them
-            if they're not the same
-                return false
-            
-        loop finishes without returning false, return true
-        '''
-        l, r = 0, len(s) - 1
-        while l <= r:
-            while l <= r and not s[l].isalnum():
-                l += 1
-            while l <= r and not s[r].isalnum():
-                r -= 1
-            if l <= r and s[l].lower() != s[r].lower():
-                return False
-            l += 1
-            r -= 1
+          if s[left].isalnum() and s[right].isalnum():
+            if s[left].lower() != s[right].lower():
+              return False
+            right -= 1
+            left += 1
+        
         return True
+
+        
 
