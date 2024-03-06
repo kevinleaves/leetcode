@@ -1,19 +1,18 @@
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
         '''
-        find starting left idx
-        start there, go left and store maximum
-        '''
-        s = ' ' + s + ' '
-        
-        r = len(s) - 1
-        
-        while s[r] == ' ':
-            r -= 1
-        
-        l = r
+        iterate from right to left
+        point to valid right
+        decrement left until it reaches a whitespace
 
-        while l > 0 and s[l] != ' ':
-            l -= 1
-        
-        return r - l
+        return window size
+        '''
+        right = len(s) - 1
+        while right >= 0 and not s[right].isalnum():
+          right -= 1
+
+        left = right
+        while left >= 0 and s[left].isalnum():
+          left -= 1
+        # left should be at a whitespace character
+        return right - left
