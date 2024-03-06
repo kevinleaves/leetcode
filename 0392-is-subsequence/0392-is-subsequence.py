@@ -1,36 +1,28 @@
 class Solution:
     def isSubsequence(self, s: str, t: str) -> bool:
-        '''
-        i:
-        o: bool. true if s is a subsequence of t
-        subsequence: if i can remove chars from t and get s by maintaining order
-        
-        {a1 b2 c1}
-            p
-        s = abbc
-        t = ahbbgdc
-        [abbc] 
-        => true
+      '''
+      use 2 pointers, one at s and one at t
+      iterate through t pointer
+        attempt to find the character at s pointer in t
+        once we've found a character at t,
+        increment t
+      
+      if we've reached the end of t and have not yet exhausted s pointer, return False
+      otherwise return true
 
-        s = abbc
-        t = ahbgdcb -> false
-        [abcb]
+      '''
+      # edge cases. s is empty, return true
+      # t is empty, return false
+      if len(s) == 0:
+        return True
+      if len(t) == 0:
+        return False
 
-        s = z
-        t = z
-
-        s= ''
-        t = ''
-        '''
-        if not s:
-            return True
-
-        p1 = 0
-        p2 = 0
-
-        while p2 < len(t) and p1 < len(s):
-            if s[p1] == t[p2]:
-                p1 += 1
-            p2 += 1
-
-        return p1 >= len(s)
+      s_index = 0
+      for t_index in range(len(t)):
+        if s_index == len(s):
+          return True
+        if t[t_index] == s[s_index]:
+          s_index += 1
+      
+      return False if s_index < len(s) else True
