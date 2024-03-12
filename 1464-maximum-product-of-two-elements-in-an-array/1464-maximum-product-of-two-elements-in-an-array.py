@@ -4,10 +4,10 @@ class Solution:
         brute force check pairs and store a max product
         O(N^2) TIME
         O(1) SPACE
-        '''
-        res = (nums[0]-1) * (nums[1]-1)
-        for i in range(len(nums)):
-          for j in range(i+1, len(nums)):
-            res = max(res, (nums[i]-1) * (nums[j]-1))
 
-        return res
+        sort array in non-decreasing order, use the last two elements to compute result
+        O(nlogn) TIME
+        O(1) SPACE
+        '''
+        nums.sort()
+        return (nums[-1]-1) * (nums[-2]-1)
