@@ -10,16 +10,17 @@ class Solution:
 
         generate 2d array from set/dict
         sort by k ascending order
+        
+        O((N + M)log(N + M)) TIME
+        O(N + M) SPACE
         '''
         pairs = {}
+
         for value, weight in items1:
           pairs[value] = weight
         
         for value, weight in items2:
-          if value in pairs:
-            pairs[value] += weight
-          else:
-            pairs[value] = weight
+          pairs[value] = pairs.get(value, 0) + weight
 
         res = list(pairs.items())
 
