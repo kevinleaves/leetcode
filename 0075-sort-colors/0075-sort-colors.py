@@ -3,12 +3,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        # BUBBLE SORT (O N^2)
-        numSwaps = 0
-        for i in range(len(nums)):
-          for j in range(len(nums) - 1):
-            if nums[j] > nums[j + 1]:
-              numSwaps += 1
-              nums[j], nums[j + 1] = nums[j + 1], nums[j]
-            
+        # SELECTION SORT (ON^2)
+        writeIdx = 0
+        while writeIdx < len(nums):
+          # find index of the smallest number          
+          lowestValIdx = writeIdx
+          for i in range(writeIdx, len(nums)):
+            if nums[i] < nums[lowestValIdx]:
+              lowestValIdx = i
+          nums[writeIdx], nums[lowestValIdx] = nums[lowestValIdx], nums[writeIdx]
+          writeIdx += 1
+        
         
