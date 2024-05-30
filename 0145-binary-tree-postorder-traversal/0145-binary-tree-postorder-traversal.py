@@ -6,16 +6,19 @@
 #         self.right = right
 class Solution:
     def postorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
-        res = []
+      res = []
+      # postorder used when parent node needs the results of children node to compute its result
+      def dfs(node: Optional[TreeNode]) -> None:
+        if not node:
+          return None
         
-        # left, right, add
-        def dfs(node):
-            if not node:
-                return
-
-            dfs(node.left)
-            dfs(node.right)
-            res.append(node.val)
-            
-        dfs(root)
-        return res
+        # left
+        dfs(node.left)
+        # right
+        dfs(node.right)
+        # process
+        res.append(node.val)
+      
+      dfs(root)
+      return res
+        
