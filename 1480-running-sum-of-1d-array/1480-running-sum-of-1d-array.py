@@ -1,21 +1,14 @@
 class Solution:
     def runningSum(self, nums: List[int]) -> List[int]:
-      '''
-      i: int[]
-      o: int[]
-      c: in place, O(1) space requires only constant memory to store prefix sum
-      
-      init variable to store running sum
-      iterate from 0 to n - 1 idx
-        add element at i to sum
-        replace element at i with sum
-      '''
+      # static array to return
+      res = [0]*len(nums)
 
-      prefixSum = 0
-      for i in range(len(nums)):
+      # first item of res and the prefix sum are initialized as the first number of nums
+      res[0], prefixSum = nums[0], nums[0]
+
+      # iterate from index 1 onwards, updating the prefix sum and res as we go
+      for i in range(1, len(nums)):
         prefixSum += nums[i]
-        nums[i] = prefixSum
-      return nums
+        res[i] = prefixSum
 
-      
-      
+      return res
