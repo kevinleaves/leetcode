@@ -5,15 +5,19 @@ class Solution:
       o: int[] of final prices for the items in prices[] after possible discounts
       c: none
       e: there are no discounts
+
+      USE A STACK
+      O(N) time
+      O(N) space
       '''
 
-      res = [0]*len(prices)
-      for l in range(len(prices)):
-        discount = 0
-        for r in range(l+1, len(prices)):
-          if prices[r] <= prices[l]:
-            discount = prices[r]
-            break
-        res[l] = prices[l] - discount
-        
-      return res
+      stack = []
+
+      for i, v in enumerate(prices):
+        while stack and prices[stack[-1]] >= v:
+          poppedIndex = stack.pop()
+          prices[poppedIndex] -= v
+        # add indices to the stack
+        stack.append(i)
+
+      return prices
