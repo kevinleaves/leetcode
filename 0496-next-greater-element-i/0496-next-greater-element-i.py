@@ -1,27 +1,38 @@
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        stack = []
         '''
-        return an array of length == nums1
-        n representing len(nums1)
-        perform n number of queries on nums2 array
-        for each item in nums1,
-          search for item in nums2 and find the next greater element to the right of it.
-          if we don't find one, query returns -1
+        i: 2 int[] nums where nums1 is a subset of nums2
+        o: array with len(nums1), where res[i] is the next greater element found in nums2
+        c: none
+        e: 
+
+        nums1 = [4,1,2]
+        nums2 = [2,1,3,4]
+        output = [-1, 3, 3]
         '''
-        # time: O(n x k) where n is the length of n1 and k is the length of n2
-        # space: O(1)
-        res = [0]*len(nums1)
         
-        for i, v1 in enumerate(nums1):
-          for j, v2 in enumerate(nums2):
-            if v2 == v1:
-              found = False
-              for k in range(j, len(nums2)):
-                if nums2[k] > v1:
-                  res[i] = nums2[k]
-                  found = True
-                  break
-              if not found:
-                res[i] = -1
+        # create a mapping for nums1
+        subset = {}
+        for i, v in enumerate(nums1):
+          subset[v] = i
+        
+        res = [0]*len(nums1)
+
+        stack = []
+        for i, v in enumerate(nums2):
+          # if current v in nums1
+            # if current v is > top of stack
+            while stack and stack[-1] < v:
+              indexInNums1 = subset[stack.pop()]
+              res[indexInNums1] = v
+            # add item to stack only if we need to
+            if v in subset:
+              stack.append(v)
+
+        # empty the rest of the stack and fill it with -1s
+        while stack:
+          popped = stack.pop()
+          res[subset[popped]] = -1
 
         return res
