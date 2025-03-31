@@ -8,10 +8,20 @@ class Solution:
       e: 
       '''
 
-      for i in range(len(nums)-1):
-        for j in range(i + 1, len(nums)):
-          if nums[i] + nums[j] == target:
-            return [i, j]
+      hashmap = {}
+
+      # if target - current number is not in hashmap as key: store the pair as value, index
+      # else, return hashmap[value], current index
+
+      for i, v in enumerate(nums):
+        diff = target - nums[i]
+        if diff in hashmap:
+          return [hashmap.get(diff), i]
+        else:
+          hashmap[v] = i
+      
+
+
 
             
         
